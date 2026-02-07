@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teacher Dashboard</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f0fff0; /* Light green background */
+            padding: 15px;
+        }
+
+        /* Top Header Row */
+        .top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        /* Left: Teacher Info Section */
+        .teacher-info-container {
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            border: 3px solid #2e8b57; /* Sea green border */
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .teacher-circle {
+            width: 80px;
+            height: 80px;
+            border: 2px solid #3cb371; /* Medium sea green */
+            border-radius: 50%;
+            background-color: #e6f7e6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #2e8b57;
+            margin-right: 15px;
+        }
+
+        .teacher-details p {
+            color: #2e8b57;
+            margin: 4px 0;
+            font-weight: 500;
+        }
+
+        /* Right: School Logo */
+        .school-logo {
+            width: 80px;
+            height: 80px;
+            border: 3px solid #2e8b57;
+            border-radius: 8px;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #2e8b57;
+            margin-left: auto; /* Aligns to right edge */
+        }
+
+        /* Bottom Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 15px;
+            width: 100%;
+            margin-bottom: 15px; /* Space before back button */
+        }
+
+        /* Schedule Box */
+        .schedule-box {
+            background-color: #ffffff;
+            border: 3px solid #2e8b57;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .schedule-box h2 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #3cb371;
+            padding-bottom: 5px;
+            text-align: center;
+        }
+
+        .schedule-box h3 {
+            color: #2e8b57;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        /* Updated Schedule Table */
+        .teacher-schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        .teacher-schedule-table th,
+        .teacher-schedule-table td {
+            border: 1px solid #2e8b57;
+            padding: 6px 4px;
+            text-align: center;
+            color: #2c6e49;
+            font-size: 13px;
+        }
+
+        .teacher-schedule-table th {
+            background-color: #e6f7e6;
+            font-weight: bold;
+        }
+
+        .teacher-schedule-table .time-col {
+            font-weight: 500;
+            text-align: left;
+            padding-left: 8px;
+        }
+
+        .schedule-summary {
+            margin-top: 10px;
+            padding: 8px;
+            background-color: #e6f7e6;
+            border-radius: 4px;
+            color: #2c6e49;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        /* Students Box */
+        .students-box {
+            background-color: #ffffff;
+            border: 3px solid #2e8b57;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .students-box h2 {
+            color: #2e8b57;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #3cb371;
+            padding-bottom: 5px;
+        }
+
+        .student-card {
+            background-color: #e6f7e6;
+            border: 2px solid #3cb371;
+            border-radius: 6px;
+            padding: 10px;
+            margin: 8px 0;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .student-card:hover {
+            background-color: #c8e6c9;
+        }
+
+        .student-card a {
+            color: #2e8b57;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Back Button Style - Positioned below students box */
+        .back-btn-container {
+            display: flex;
+            justify-content: flex-end; /* Aligns to right edge */
+            width: 100%;
+        }
+
+        .back-btn {
+            background-color: #2e8b57;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 20px;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 14px;
+        }
+
+        .back-btn:hover {
+            background-color: #246b45;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header -->
+    <div class="top-header">
+        <!-- Left: Teacher Info -->
+        <div class="teacher-info-container">
+            <div class="teacher-circle">Teacher<br>Photo</div>
+            <div class="teacher-details">
+                <p><strong>NAME:</strong> Aloha Oledan-Higanto</p>
+                <p><strong>POSITION:</strong> Master Teacher I</p>
+                <p><strong>SCHOOL YEAR:</strong> 2025-2026</p>
+            </div>
+        </div>
+
+        <!-- Right: School Logo -->
+        <div class="school-logo">High<br>School<br>Logo</div>
+    </div>
+
+    <!-- Bottom Content Grid -->
+    <div class="content-grid">
+        <!-- Schedule Box -->
+        <div class="schedule-box">
+            <h2>TEACHER'S PROGRAM</h2>
+            <h3>Aloha Oledan-Higanto | Master Teacher I | S.Y. 2025-2026</h3>
+            
+            <table class="teacher-schedule-table">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>No. of Min</th>
+                        <th>MONDAY</th>
+                        <th>TUESDAY</th>
+                        <th>WEDNESDAY</th>
+                        <th>THURSDAY</th>
+                        <th>FRIDAY</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="time-col">7:10-7:30 AM</td>
+                        <td>20</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>Flag Ceremony/Daily Routine</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td class="time-col">7:30-8:30 AM</td>
+                        <td>60</td>
+                        <td>Preparation of instructional materials for the lesson and related ancillary work</td>
+                        <td>Preparation of instructional materials for the lesson and related ancillary work</td>
+                        <td>Preparation of instructional materials for the lesson and related ancillary work</td>
+                        <td>Preparation of instructional materials for the lesson and related ancillary work</td>
+                        <td>Preparation of instructional materials for the lesson and related ancillary work</td>
+                    </tr>
+                    <tr>
+                        <td class="time-col">8:30-9:30 AM</td>
+                        <td>60</td>
+                        <td>Filipino<br>Grade 10<br>Compassion</td>
+                        <td>Filipino<br>Grade 10<br>Compassion</td>
+                        <td>Filipino<br>Grade 10<br>Compassion</td>
+                        <td>Filipino<br>Grade 10<br>Compassion</td>
+                        <td>Filipino<br>Grade 10<br>Compassion</td>
+                    </tr>
+                    <tr>
+                        <td class="time-col">9:30-10:00 AM</td>
+                        <td>30</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>Health Break</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td class="time-col">10:00-11:00 AM</td>
+                        <td>60</td>
+                        <td>Filipino<br>Grade 10<br>STE Archimedes<br><small>Checking and recording students' outputs</small></td>
+                        <td>Filipino<br>Grade 10<br>STE Archimedes<br><small>Checking and recording students' outputs</small></td>
+                        <td>Filipino<br>Grade 10<br>STE Archimedes<br><small>Checking and recording students' outputs</small></td>
+                        <td>Filipino<br>Grade 10<br>STE Archimedes<br><small>Checking and recording students' outputs</small></td>
+                        <td>Checking and recording of students' outputs</td>
+                    </tr>
+                    <tr>
+                        <td class="time-col">11:00-12:00 PM</td>
+                        <td>60</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>Checking and recording students' outputs</td>
+                    </tr>
+                    <tr>
+                        <td class="time-col">12:00-1:00 PM</td>
+                        <td>60</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>Lunch Break</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td class="time-col">1:00-2:00 PM</td>
+                        <td>60</td>
+                        <td>Filipino<br>Grade 10<br>Magnificence</td>
+                        <td>Filipino<br>Grade 10<br>Magnificence</td>
+                        <td>Filipino<br>Grade 10<br>Magnificence</td>
+                        <td>Filipino<br>Grade 10<br>Magnificence</td>
+                        <td>Filipino<br>Grade 10<br>Magnificence</td>
+                    </tr>
+                    <tr>
+                        <td class="time-col">2:00-3:00 PM</td>
+                        <td>60</td>
+                        <td>Filipino<br>Grade 10<br>Persistence</td>
+                        <td>Filipino<br>Grade 10<br>Persistence</td>
+                        <td>Filipino<br>Grade 10<br>Persistence</td>
+                        <td>Filipino<br>Grade 10<br>Persistence</td>
+                        <td>Checking and recording students' outputs</td>
+                    </tr>
+                    <tr>
+                        <td class="time-col">3:00-4:00 PM</td>
+                        <td>60</td>
+                        <td>Recording of Academic performance results</td>
+                        <td>Recording of Academic performance results</td>
+                        <td>Recording of Academic performance results</td>
+                        <td>Recording of Academic performance results</td>
+                        <td>Recording of Academic performance results</td>
+                    </tr>
+                    <tr>
+                        <td class="time-col">4:00-5:00 PM</td>
+                        <td>60</td>
+                        <td>Mentoring of Mentees</td>
+                        <td>Mentoring of Mentees</td>
+                        <td>Mentoring of Mentees</td>
+                        <td>Mentoring of Mentees</td>
+                        <td>Mentoring of Mentees</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="schedule-summary">
+                <strong>SUMMARY:</strong><br>
+                Total No. of teaching hours (per week): 1080 mins/week (18 hrs/week)<br>
+                Inclusive of class advisory (excluding HR): 18 hrs/week<br>
+                Total No. of teaching load: 720 mins/week<br>
+                Status of Teaching Load: Focal Person - Grade 10<br>
+                Prepared by: Aloha Oledan-Higanto (Master Teacher I)<br>
+                Noted by: Isidore Vicente V. Villarino, D.M. (Principal IV)
+            </div>
+        </div>
+
+        <!-- Students Box -->
+        <div class="students-box">
+            <h2>ENROLLED SECTIONS/STUDENTS</h2>
+            <div class="student-card">
+                <a href="section-details.html?section=10-Compassion&subject=Filipino">Grade 10 - Compassion</a>
+            </div>
+            <div class="student-card">
+                <a href="section-details.html?section=10-STE Archimedes&subject=Filipino">Grade 10 - STE Archimedes</a>
+            </div>
+            <div class="student-card">
+                <a href="section-details.html?section=10-Magnificence&subject=Filipino">Grade 10 - Magnificence</a>
+            </div>
+            <div class="student-card">
+                <a href="section-details.html?section=10-Persistence&subject=Filipino">Grade 10 - Persistence</a>
+            </div>
+            <div class="student-card">
+                <a href="focal-details.html?role=Focal Person&level=Grade 10">Focal Person - Grade 10</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back Button - Positioned below enrolled students box, aligned right -->
+    <div class="back-btn-container">
+        <a href="login.html" class="back-btn">Back to Login</a>
+    </div>
+    <a href="teacher-dasboard.html"
+    style="text-decoration: none;color: inherit;">
+        <!-
+</body>
+</html>
